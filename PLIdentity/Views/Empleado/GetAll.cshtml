@@ -1,0 +1,80 @@
+﻿@model ML.Empleado
+@{
+    ViewData["Title"] = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row text-center">
+    <div class="col col-lg-12">
+        <h1>GetAll</h1>
+    </div>
+</div>
+<div class="row text-center">
+    <div class="col-lg-3">
+        @* <a href="../Controllers/EmpleadoController.cs">Agregar</a> *@
+        <form asp-action="Form" method="get" asp-controller="Empleado">
+            <input type="submit" value="Agregar" class="btn btn-success">
+        </form>
+    </div>
+    <div />
+
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col col-lg-12">
+
+                <table class="table">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Editar</th>
+                            <th>#Empleado</th>
+                            <th>Nombre empleado</th>
+                            <th>Email</th>
+                            <th>RFC</th>
+                            <th>NSS</th>
+                            <th>Fecha Nacimiento</th>
+                            <th>Fecha Ingreso</th>
+                            <th>Foto</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (ML.Empleado empleado in Model.Empleados)
+                        {
+                            <tr>
+                                <td class="text-center">
+                                    <a class="btn btn-warning" href="">Editar</a>
+                                </td>
+                                <td>@empleado.NumeroEmpleado</td>
+                                <td>@empleado.Nombre @Model.ApellidoPaterno @Model.ApellidoMaterno</td>
+                                <td>@empleado.Email</td>
+                                <td>@empleado.RFC</td>
+                                <td>@empleado.NSS</td>
+                                <td>@empleado.FechaNacimiento</td>
+                                <td>@empleado.FechaIngreso</td>
+                                <td>
+                                    @if (empleado.Foto == null)
+                                    {
+                                        <img src="https://thumbs.dreamstime.com/b/perfil-de-usuario-vectorial-avatar-predeterminado-179376714.jpg" id="fotoEmpleado" style="width: 100px; height:100px;" />
+                                    }
+                                    else
+                                    {
+                                        <img src="data:image/png;base64,@Convert.ToBase64String(empleado.Foto)" id="fotoEmpleado" style="width: 100px; height:100px;" />
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    <a class="btn btn-danger" href="">Eliminar</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+
+    </div>
+
